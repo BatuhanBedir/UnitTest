@@ -27,7 +27,7 @@ public class ApplicationEvaluateUnitTest
         var appResult = evaluator.Evaluate(form);
 
         //Assert
-        Assert.AreEqual(appResult, ApplicationResult.AutoRejected);
+        Assert.That(appResult, Is.EqualTo(ApplicationResult.AutoRejected));
     }
 
     [Test]
