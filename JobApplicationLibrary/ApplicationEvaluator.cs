@@ -8,10 +8,11 @@ public class ApplicationEvaluator
     private const int minAge = 18;
     private const int autoAcceptedYearOfExperience = 15;
     private List<string> techStackList = new() { "C#", "RabbitMQ", "Microservice", "Visual Studio" };
-    private IdentityValidator identityValidator;
-    public ApplicationEvaluator()
+    private readonly IIdentityValidator identityValidator;
+
+    public ApplicationEvaluator(IIdentityValidator identityValidator)
     {
-        identityValidator = new IdentityValidator();
+        this.identityValidator = identityValidator;
     }
     public ApplicationResult Evaluate(JobApplication form)
     {
