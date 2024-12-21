@@ -86,9 +86,10 @@ public class ApplicationEvaluateUnitTest
     public void Application_WithInValidIdentityNumber_TransferredToHR()
     {
         //Arrage
-
-        var mockValidator = new Mock<IIdentityValidator>();
+        var mockValidator = new Mock<IIdentityValidator>(MockBehavior.Loose);
+        //var mockValidator = new Mock<IIdentityValidator>(MockBehavior.Strict);
         mockValidator.Setup(x => x.IsValid(It.IsAny<string>())).Returns(false);
+       // mockValidator.Setup(x => x.CheckConnectionToRemoteServer()).Returns(false);
 
         var evaluator = new ApplicationEvaluator(mockValidator.Object);
         var form = new JobApplication()
@@ -106,3 +107,22 @@ public class ApplicationEvaluateUnitTest
         Assert.That(appResult, Is.EqualTo(ApplicationResult.TransferredToHR));
     }
 }
+
+#region MockBehavior.Strict
+/*
+    Sadece açýkça ayarlanmýþ (setup edilmiþ) olan metotlar veya özellikler çaðrýlabilir.
+    Testin sýký kontrol edilmesi gereken durumlarda
+
+    Kullanýlan bütün metotlarýn setup yazmak gerekiyor.
+    daha kýrýlgan testler
+ */
+#endregion
+
+#region MockBehavior.Loose
+/*
+    Ayarlanmayan metotlar ve özellikler çaðrýlabilir, ancak varsayýlan deðer döndürürler.
+    Sýký denetim gerektirmediði, sadece belirli metotlarýn veya özelliklerin test edilmek istendiði durumlarda
+
+    return default value
+ */
+#endregion

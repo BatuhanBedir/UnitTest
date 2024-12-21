@@ -3,5 +3,7 @@
     public interface IIdentityValidator
     {
         bool IsValid(string identityNumber);
+
+        bool CheckConnectionToRemoteServer();
     }
 }
